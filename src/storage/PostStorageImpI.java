@@ -1,10 +1,14 @@
-import exception.PostNotFoundException;
+package storage;
 
-public class PostStorageImpI {
+import exception.PostNotFoundException;
+import model.Post;
+
+public class PostStorageImpI  implements PostStorage{
     private Post[] posts = new Post[10];
     private int size = 0;
 
-    public void addPost(Post post) {
+    @Override
+    public void add(Post post) {
         if (size == posts.length) {
             extend();
         }
@@ -19,6 +23,8 @@ public class PostStorageImpI {
     }
 
 
+
+
     public Post getPostByTitle(String title) throws PostNotFoundException {
 
         for (int i = 0; i < size; i++) {
@@ -26,7 +32,7 @@ public class PostStorageImpI {
                 return posts[i];
             }
         }
-        throw new PostNotFoundException("Post with " + title + " already exists ") ;
+        throw new PostNotFoundException("model.Post with " + title + " already exists ") ;
     }
 
 
@@ -58,6 +64,11 @@ public class PostStorageImpI {
             }
         }
 
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return size==0;
     }
 
 
